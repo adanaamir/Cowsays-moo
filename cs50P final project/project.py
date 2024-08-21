@@ -28,7 +28,7 @@ def user_choice():
 
 
 def read_data(user_ans):
-    list = []
+    data = []
     with open("fortunes.csv", "r", newline= '') as file:
         if user_ans == "0":
             response = input("aww cmon lets hear some jokes instead? (okay/nah) ")
@@ -38,8 +38,8 @@ def read_data(user_ans):
                 csv_reader = csv.reader(file)
 
                 for line in csv_reader:
-                    list.append(line[1]) 
-                cowsay.fox(choice(list))
+                    data.append(line[1]) 
+                cowsay.fox(choice(data))
 
             elif response[0] == "n":
                 print("Alright then! lets get you a motivational quote")
@@ -47,16 +47,16 @@ def read_data(user_ans):
             csv_reader = csv.reader(file)
 
             for line in csv_reader:
-                list.append(line[0])  #appending the first column(motivational quotes) to the list
-            cowsay.cow(choice(list))
+                data.append(line[0])  #appending the first column(motivational quotes) to the list
+            cowsay.cow(choice(data))
                     # response_2 = input("Do you wanna hear another one? (y/n) ")
 
         elif user_ans == "1":
             csv_reader = csv.reader(file)
 
             for line in csv_reader:
-                list.append(line[1])
-            cowsay.fox(choice(list))
+                data.append(line[1])
+            cowsay.fox(choice(data))
 
 def write_data():
     ...
