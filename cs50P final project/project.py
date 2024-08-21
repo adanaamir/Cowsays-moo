@@ -42,26 +42,25 @@ def read_data(user_ans):
             for line in csv_reader:
                 column.append(line['riddles'])
             cowsay.fox(choice(column))
-
-            answer = input("Enter your answer: ").lower()
-            # with open("before.csv", "w") as new_file:
-            #     fieldnames = ["answers"]
-            #     writer = csv.DictWriter(new_file, fieldnames=fieldnames)
-
-            #     writer.writeheader()
-            #     for line in writer:
-            #         writer.writerow(answer)
-
-            for line in csv_reader:
-                ans.append(line['answers'])
             
-            for i in ans:
-                if answer == ans[i]:
-                    print("Correct")
-                else:
-                    print("Nope try again")
+            answer = input("Enter your answer: ").lower()
+
+            #opening the file again to make a new instance of csv_reader since it is exhaused
+            with open("before.csv", "r", newline= '') as file:
+                csv_reader = csv.DictReader(file)
+                for line in csv_reader:
+                    ans.append(line['answers'])  #appending the answers to a new list
+                
+                for i in ans:
+                    if answer == i:
+                        print("Alright thats correct")
+                    else:
+                        pass
+                if answer != i:  #after the loop if there the answer is wrong then print wrong instead of printing wrong for every wrong answer
+                    print("hmm maybe try again...")
 
 
+# def joke():
         elif user_ans == "1":
 
             print("\nLets hear some jokes then\n")
