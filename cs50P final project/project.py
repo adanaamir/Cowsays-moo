@@ -28,8 +28,7 @@ def user_choice():
 
 
 def read_data(user_ans):
-    column_1= []
-    column_2= []
+    column= []
     with open("before.csv", "r", newline= '') as file:
         if user_ans == "0":
             response = input("aww cmon lets hear some jokes instead? (okay/nah) ")
@@ -40,8 +39,8 @@ def read_data(user_ans):
                 headers = next(csv_reader)
 
                 for line in csv_reader:
-                    column_1.append(line[1]) 
-                cowsay.fox(choice(column_1))
+                    column.append(line[1]) 
+                cowsay.fox(choice(column))
 
             elif response[0] == "n":
                 print("Alright then! lets get you a motivational quote")
@@ -50,16 +49,16 @@ def read_data(user_ans):
             headers = next(csv_reader)
 
             for line in csv_reader:
-                column_2.append(line[0])  #appending the first column(motivational quotes) to the list
-            cowsay.cow(choice(column_2))
+                column.append(line[0])  #appending the first column(motivational quotes) to the list
+            cowsay.cow(choice(column))
                     # response_2 = input("Do you wanna hear another one? (y/n) ")
 
         elif user_ans == "1":
             csv_reader = csv.reader(file)
 
             for line in csv_reader:
-                rows.append(line[1])
-            cowsay.fox(choice(rows))
+                column.append(line[1])
+            cowsay.fox(choice(column))
 
         else:
             raise ValueError
