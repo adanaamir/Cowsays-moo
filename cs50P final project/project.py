@@ -7,10 +7,10 @@ def main():
     read_data(user_answer)
 
 def user_choice():
-    ans = input("Are you feeling lazy and need motivation or maybe hear a joke? (yes/yepp) ").strip().lower()
+    ans = input("Do you wanna hear some jokes or maybe you're feeling clever and wanna solve some riddles? (yes iam / yepp) ").strip().lower()
     while True:
         if ans[0] == "y":
-            advice = input("Cool! Do you need me to motivate you or tell you a joke? (0 = motivate / 1= joke) ").lower()
+            advice = input("Cool! Riddles or jokes? (0 = riddles / 1= joke) ").lower()
             return advice   #this ends the loop after user gives a response
         else:
             ans = input("You have to say yes :( ").lower()
@@ -31,30 +31,20 @@ def read_data(user_ans):
     column= []
     with open("before.csv", "r", newline= '') as file:
         if user_ans == "0":
-            response = input("aww cmon lets hear some jokes instead? (okay/nah) ")
+            print("ooo okay! lets see if you can crack this riddle.")
+            csv_reader = csv.DictReader(file)
+            # fieldnames = ["riddles", "jokes"]
 
-            if response in ["okay", "alright", "ok"]:
-                print("YIPIEES!\n Here's a joke for you:")
-                csv_reader = csv.reader(file)
-                headers = next(csv_reader)
-
-                for line in csv_reader:
-                    column.append(line[1]) 
-                cowsay.fox(choice(column))
-
-            elif response[0] == "n":
-                print("Alright then! lets get you a motivational quote")
-            # while True:
-            csv_reader = csv.reader(file)
-            headers = next(csv_reader)
+            # writer = csv.DictWriter(file, fieldnames=fieldnames)
 
             for line in csv_reader:
-                column.append(line[0])  #appending the first column(motivational quotes) to the list
-            cowsay.cow(choice(column))
-                    # response_2 = input("Do you wanna hear another one? (y/n) ")
+                column.append(line['riddles'])
+            cowsay.fox(choice(column))
 
         elif user_ans == "1":
-            csv_reader = csv.reader(file)
+
+            print("Lets hear some jokes then")
+            csv_reader = csv.DictReader(file)
 
             for line in csv_reader:
                 column.append(line[1])
