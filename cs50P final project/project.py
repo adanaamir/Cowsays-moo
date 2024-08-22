@@ -1,11 +1,12 @@
 import cowsay, csv
 from random import choice
-import sys
+import sys, json
 
 def main():
-    user_choice()
-    riddle()
-    joke()
+    # user_choice()
+    # riddle()
+    # joke()
+    ask_questions()
 
 def user_choice():
     ans = input("Do you wanna hear some jokes or maybe you're feeling clever and wanna solve some riddles? (yes iam / yepp) ").strip().lower()
@@ -112,7 +113,9 @@ def joke():
 
 
 def ask_questions():
-    ...
+    with open("responses.json", "r") as new_file:
+        reader = json.load(new_file)
+    print(reader)
 
 
 if __name__ == "__main__":
