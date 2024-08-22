@@ -3,22 +3,26 @@ from random import choice
 import sys, json
 
 def main():
-    # user_choice()
-    # riddle()
-    # joke()
+    user_choice()
+    riddle()
+    joke()
     ask_questions()
 
 def user_choice():
     ans = input("Do you wanna hear some jokes or maybe you're feeling clever and wanna solve some riddles? (yes iam / yepp) ").strip().lower()
     while True:
         if ans[0] == "y":
-            response = input("Cool! Riddles or jokes? (0 = riddles / 1= joke) ").lower()
+            response = input("\nPlease choose \n1.Riddles, \n2.Jokes \n3.Question asking \n4.Exit the program \n").lower()
             
             #calling the functions according to the user response
-            if response == "0":
+            if response == "1":
                 riddle()
-            elif response == "1":
+            elif response == "2":
                 joke()
+            elif response == "3":
+                ask_questions()
+            elif response == "4":
+                sys.exit("Thank you for playing, had a fun time with you!")
             else:
                 raise ValueError
             # return response   #this ends the loop after user gives a response
@@ -34,17 +38,17 @@ def user_choice():
                     sys.exit()
                     
                 elif ans[0] == 'y':
-                    print("Yayyy")
+                    print("\nYayyy")
 
             elif ans[0] == "y":
-                print("Yayyy")
+                print("\nYayyy")
         else:
             raise TypeError
 
 def riddle():
     column= []
     ans = []
-    print("\nooo okay! lets see if you can crack this riddle.\n")
+    print("\nooo okay! lets see if you can crack this riddle.")
     while True:
         with open("before.csv", "r", newline= '') as file:
             csv_reader = csv.DictReader(file)
@@ -71,7 +75,7 @@ def riddle():
 
                         response = input("Do you wanna continue solving more riddles? (y/n) ")
                         if response == "n":
-                            sys.exit()
+                            user_choice()
                         elif response == "y":
                             print("alright!\n")
                             response = "0"
@@ -81,7 +85,7 @@ def riddle():
                 if match == False:  #checking after loop
                     response = input("Its okay, do you wanna try again? (y/n) ")
                     if response == "n":
-                        sys.exit()
+                        user_choice()
                     elif response == "y":
                         print("\n\talright!\n")
                         response = "0"
@@ -100,10 +104,10 @@ def joke():
                 column.append(line['jokes'])
             cowsay.fox(choice(column))
 
-            ans = input("That was funny LOL\nDo you wanna some more jokes? (y/n) ")
+            ans = input("That was funny LOL\nDo you wanna hear some more jokes? (y/n) ")
             if ans == "n":
                 #for now exiting the code
-                sys.exit()
+                user_choice()
             elif ans == "y":
                 print("sure!\n")
                 ans = "1"  #setting the ans to "1" so that the above loop (that works only if the answer is "1" is run)
@@ -111,22 +115,17 @@ def joke():
                 raise ValueError                
 
 
-
 def ask_questions():
-    cowsay.cow("Ask me any question and ill answer it\n If you wanna exit then press \"E\" anytime")
+    cowsay.cow("Ask me any question and ill answer it\n If you wanna go to menu then press \"E\" anytime")
     while True:
-        questions = input().lower()
+        questions = input()
         if questions == "E":
-            sys.exit("Thank you for playing, had a fun time with you!")
+            user_choice()
+            
         else:
             with open("responses.json", "r") as new_file:
                 reader = json.load(new_file)  #loading the json file
             cowsay.cow(choice(reader))
-            
-            # if questions == "E":
-            #     sys.exit("Thank you for playing, had a fun time with you!")
-            # else:
-            #     continue
 
 
 if __name__ == "__main__":
