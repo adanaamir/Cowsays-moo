@@ -113,9 +113,20 @@ def joke():
 
 
 def ask_questions():
-    with open("responses.json", "r") as new_file:
-        reader = json.load(new_file)
-    print(reader)
+    cowsay.cow("Ask me any question and ill answer it\n If you wanna exit then press \"E\" anytime")
+    while True:
+        questions = input().lower()
+        if questions == "E":
+            sys.exit("Thank you for playing, had a fun time with you!")
+        else:
+            with open("responses.json", "r") as new_file:
+                reader = json.load(new_file)  #loading the json file
+            cowsay.cow(choice(reader))
+            
+            # if questions == "E":
+            #     sys.exit("Thank you for playing, had a fun time with you!")
+            # else:
+            #     continue
 
 
 if __name__ == "__main__":
