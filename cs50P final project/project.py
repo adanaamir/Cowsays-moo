@@ -11,16 +11,16 @@ def user_choice():
     ans = input("Do you wanna hear some jokes or maybe you're feeling clever and wanna solve some riddles? (yes iam / yepp) ").strip().lower()
     while True:
         if ans[0] == "y":
-            advice = input("Cool! Riddles or jokes? (0 = riddles / 1= joke) ").lower()
+            response = input("Cool! Riddles or jokes? (0 = riddles / 1= joke) ").lower()
             
             #calling the functions according to the user response
-            if advice == "0":
+            if response == "0":
                 riddle()
-            elif advice == "1":
+            elif response == "1":
                 joke()
             else:
                 raise ValueError
-            # return advice   #this ends the loop after user gives a response
+            # return response   #this ends the loop after user gives a response
         
         elif ans[0] == "n":
             ans = input("You have to say yes :( ").lower()
@@ -43,44 +43,75 @@ def user_choice():
 def riddle():
     column= []
     ans = []
-    with open("before.csv", "r", newline= '') as file:
-        print("\nooo okay! lets see if you can crack this riddle.\n")
-        csv_reader = csv.DictReader(file)
-
-        for line in csv_reader:
-            column.append(line['riddles'])
-        cowsay.fox(choice(column))
-            
-        answer = input("Enter your answer: ").lower()
-
-        #opening the file again to make a new instance of csv_reader since it is exhaused
+    print("\nooo okay! lets see if you can crack this riddle.\n")
+    while True:
         with open("before.csv", "r", newline= '') as file:
-                
             csv_reader = csv.DictReader(file)
-            for line in csv_reader:
-                ans.append(line['answers'])  #appending the answers to a new list
-                
-            #flag
-            match = False
-            for i in ans:
-                if answer == i:
-                    match = True
-                    print("Alright thats correct")
 
-            if match == False:  #checking after loop
-                print("Its okay, try again...")
+            for line in csv_reader:
+                column.append(line['riddles'])
+            cowsay.fox(choice(column))
+                    
+            answer = input("Enter your answer: ").lower()
+
+            #opening the file again to make a new instance of csv_reader since it is exhaused
+            with open("before.csv", "r", newline= '') as file:
+                        
+                csv_reader = csv.DictReader(file)
+                for line in csv_reader:
+                    ans.append(line['answers'])  #appending the answers to a new list
+                        
+                #flag
+                match = False
+                for i in ans:
+                    if answer == i:
+                        match = True
+                        print("Thats correct!!")
+
+                        response = input("Do you wanna continue solving more riddles? (y/n) ")
+                        if response == "n":
+                            sys.exit()
+                        elif response == "y":
+                            print("alright!\n")
+                            response = "0"
+                        else:
+                            raise ValueError
+
+                if match == False:  #checking after loop
+                    response = input("Its okay, do you wanna try again? (y/n) ")
+                    if response == "n":
+                        sys.exit()
+                    elif response == "y":
+                        print("\n\talright!\n")
+                        response = "0"
+                    else:
+                        raise ValueError
 
 def joke():
     column = []
     print("\nLets hear some jokes then\n")
-    with open("before.csv", "r", newline='') as file:
-        csv_reader = csv.DictReader(file)
 
-        for line in csv_reader: 
-            column.append(line['jokes'])
-        cowsay.fox(choice(column))
+    while True:
+        with open("before.csv", "r", newline='') as file:
+            csv_reader = csv.DictReader(file)
 
-def write_data():
+            for line in csv_reader: 
+                column.append(line['jokes'])
+            cowsay.fox(choice(column))
+
+            ans = input("That was funny LOL\nDo you wanna some more jokes? (y/n) ")
+            if ans == "n":
+                #for now exiting the code
+                sys.exit()
+            elif ans == "y":
+                print("sure!\n")
+                ans = "1"  #setting the ans to "1" so that the above loop (that works only if the answer is "1" is run)
+            else:
+                raise ValueError                
+
+
+
+def ask_questions():
     ...
 
 
