@@ -3,7 +3,7 @@ from random import choice
 import sys, json
 
 cowsay_char = [cowsay.beavis, cowsay.cheese, cowsay.cow, cowsay.daemon, cowsay.dragon, cowsay.fox, cowsay.ghostbusters, 
-               cowsay.kitty,cowsay.meow, cowsay.miki, cowsay.milk, cowsay.octopus, cowsay.stegosaurus, cowsay.stimpy, cowsay.trex, 
+               cowsay.kitty,cowsay.meow, cowsay.miki, cowsay.milk, cowsay.octopus, cowsay.stimpy, 
                cowsay.turkey, cowsay.turtle, cowsay.tux]
 
 def main():
@@ -14,11 +14,12 @@ def main():
     write_questions()
 
 def user_choice():
-    ans = input("Are you ready to play? (yes iam / yepp) ").strip().lower()
+    ans = input("Are you ready to play? (yes /no /e = exit): ").strip().lower()
     while True:
         if ans[0] == "y":
-            response = input("\nPlease choose \n1.Riddles \n2.Jokes \n3.Question asking \n4.Exit the program \n").lower()
-            
+            print("\n1. Riddles \n2. Jokes \n3. Question asking")
+            response = input("\nChoose anyone of the above: ").lower()
+                
             #calling the functions according to the user response
             if response == "1":
                 riddle()
@@ -26,12 +27,10 @@ def user_choice():
                 joke()
             elif response == "3":
                 ask_questions()
-            elif response == "4":
-                sys.exit("Thank you for playing, had a fun time with you!")
             else:
-                raise ValueError
+                raise ValueError("\nPlease choose from the list 😟")
             # return response   #this ends the loop after user gives a response
-        
+
         elif ans[0] == "n":
             ans = input("You have to say yes :( ").lower()
 
@@ -41,14 +40,18 @@ def user_choice():
                 if ans[0] == "n":
                     cowsay.cow("You made me sad")
                     sys.exit()
-                    
+                        
                 elif ans[0] == 'y':
                     print("\nYayyy")
 
             elif ans[0] == "y":
                 print("\nYayyy")
+
+        elif ans == "e":
+            sys.exit("\nThank you for playing, had a fun time with you! 😙")
+            
         else:
-            raise TypeError
+            raise ValueError("Please provide a valid response 🙂")
 
 def riddle():
     column= []
@@ -92,7 +95,7 @@ def riddle():
                             print("alright!\n")
                             continue   #response = "0"
                         else:
-                            raise ValueError
+                            raise ValueError("Please provide a valid response 🙂")
 
                 if not match:  #checking after loop
                     response = input("incorrect, do you wanna try again? (y/n) ")
@@ -102,7 +105,7 @@ def riddle():
                         print("\n\talright!\n")
                         continue  #skip the rest of the loop and show a new riddle
                     else:
-                        raise ValueError
+                        raise ValueError("Please provide a valid response 🙂")
 
 def joke():
     column = []
@@ -128,11 +131,11 @@ def joke():
                 print("sure!\n")
                 ans = "1"  #setting the ans to "1" so that the above loop (that works only if the answer is "1" is run)
             else:
-                raise ValueError                
+                raise ValueError("Please provide a valid response 🙂")     
 
 
 def ask_questions():
-    cowsay.cow("Ask me any question and ill answer it\n 1. If you wanna go to menu then press \"E\" anytime\n2. Press \"W\" to write responses\n ")
+    cowsay.cow("Ask me any question and ill answer it\n 1. If you wanna go back to menu press \"E\" anytime\n2. Press \"W\" to write responses\n ")
     while True:
         try:
             questions = input("Ask a question or press \"W\" to add responses: ")
@@ -150,7 +153,7 @@ def ask_questions():
                     character(response)
                     
         except FileNotFoundError:
-            sys.exit()
+            sys.exit("No file found")
 
 def write_questions():
     while True:
@@ -172,7 +175,7 @@ def write_questions():
                 continue
             
         except FileNotFoundError:
-            sys.exit()
+            sys.exit("No file found")
                 
 if __name__ == "__main__":
     main()
