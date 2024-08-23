@@ -109,6 +109,7 @@ def joke():
     print("\nLets hear some jokes then\n")
 
     while True:
+        column.clear()
         with open("before.csv", "r", newline='') as file:
             csv_reader = csv.DictReader(file)
 
