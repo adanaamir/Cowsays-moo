@@ -1,1 +1,1 @@
-libraries used: cowsay, json, csv, sys, random
+cowsay, json, csv, sys, random
