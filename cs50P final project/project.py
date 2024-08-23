@@ -114,7 +114,7 @@ def joke():
             csv_reader = csv.DictReader(file)
 
             for line in csv_reader: 
-                column.append(line['jokes'])
+                column.append(line['jokes'].replace("|","\n"))
 
             character = choice(cowsay_char)  #randomly selecting a character from the character list(global)
             jokes_choice = choice(column)    #randomly selecting a joke from csv file
