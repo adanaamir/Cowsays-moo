@@ -14,7 +14,7 @@ def main():
     write_questions()
 
 def user_choice():
-    ans = input("Welcome, are you ready to play? (yes iam / yepp) ").strip().lower()
+    ans = input("Are you ready to play? (yes iam / yepp) ").strip().lower()
     while True:
         if ans[0] == "y":
             response = input("\nPlease choose \n1.Riddles \n2.Jokes \n3.Question asking \n4.Exit the program \n").lower()
@@ -85,7 +85,7 @@ def riddle():
                     if answer == i:
                         match = True
 
-                        response = input("Thats correct!\n\nDo you wanna continue solving more riddles? (y/n) ")
+                        response = input("\nThats correct!\n\nDo you wanna continue solving more riddles? (y/n) ")
                         if response == "n":
                             user_choice()
                         elif response == "y":
@@ -131,10 +131,10 @@ def joke():
 
 
 def ask_questions():
-    cowsay.cow("Ask me any question and ill answer it\n If you wanna go to menu then press \"E\" anytime\nPress \"W\" to write responses\n ")
+    cowsay.cow("Ask me any question and ill answer it\n 1. If you wanna go to menu then press \"E\" anytime\n2. Press \"W\" to write responses\n ")
     while True:
         try:
-            questions = input()
+            questions = input("Ask a question or press \"W\" to add responses: ")
             if questions == "E":
                 user_choice()
             elif questions == "W":
@@ -164,7 +164,7 @@ def write_questions():
             with open("responses.json", "w") as new_file:     #writing the appended data to the file
                 json.dump(data, new_file, indent = 4)
 
-            response = input("Done!\nPress \"M\" if you want to add more , \"E\" to exit: ")
+            response = input("\nDone!\n\nPress \"M\" if you want to add more , \"E\" to exit: ")
             if response == "E":
                 user_choice()
             elif response == "M":
