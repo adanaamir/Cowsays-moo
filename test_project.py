@@ -1,4 +1,4 @@
-from project import user_choice, riddle, joke, ask_questions, write_questions
+from project import user_choice, riddle, joke, ask_questions, write_responses
 from unittest.mock import patch
 
 # Since user_choice() relies on user input, we'll need to mock this input.
@@ -109,23 +109,23 @@ def test_ask_questions():
             assert str(e) == "\nThank you for playing, had a fun time with you! 😙"
             
 #testing write question function
-def test_write_questions_1():
+def test_write_responses_1():
     with patch("builtins.input", side_effect=["are you real?", "W", "mom said no, sorry", "E", "e"]):
         try:
             ask_questions()   
         except SystemExit as e:   
             assert str(e) == "\nThank you for playing, had a fun time with you! 😙"
             
-def test_write_questions_2():
+def test_write_responses_2():
     with patch("builtins.input", side_effect=["not a very nice question", "M", "8, it has to be 8", "E", "e"]):
         try:
-            write_questions()   
+            write_responses()   
         except SystemExit as e:   
             assert str(e) == "\nThank you for playing, had a fun time with you! 😙"
 
-def test_write_questions_2():
+def test_write_responses_2():
     with patch("builtins.input", side_effect=["im paid enough not to answer your question", "/"]):
         try:
-            write_questions()   
+            write_responses()   
         except SystemExit:
             pass

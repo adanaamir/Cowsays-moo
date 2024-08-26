@@ -13,7 +13,7 @@ def main():
     riddle()
     joke()
     ask_questions()
-    write_questions()
+    write_responses()
 
 def user_choice():
     ans = input("Are you ready to play? (yes /no /e = exit): ").strip().lower()
@@ -143,7 +143,7 @@ def ask_questions():
             if questions == "E":
                 user_choice()
             elif questions == "W":
-                write_questions()
+                write_responses()
                 
             else:
                 with open("responses.json", "r") as new_file:
@@ -156,7 +156,7 @@ def ask_questions():
         except FileNotFoundError:
             sys.exit("No file found")
 
-def write_questions():
+def write_responses():
     while True:
         try:
             #reading the file before writing to it, since the data already exists in this file
