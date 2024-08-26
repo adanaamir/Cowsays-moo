@@ -93,7 +93,7 @@ def test_jokes_ValueError_2():
         except ValueError as e:   
             assert str(e) == "\nPlease choose from the list 😟"
 
-#testting questions function
+#testing question function
 def test_ask_questions():
     with patch("builtins.input", side_effect=["Whats the meaning of life", "E", "e"]):
         try:
@@ -101,6 +101,7 @@ def test_ask_questions():
         except SystemExit as e:   
             assert str(e) == "\nThank you for playing, had a fun time with you! 😙"
             
+#testing write question function
 def test_write_questions_1():
     with patch("builtins.input", side_effect=["are you real?", "W", "mom said no, sorry", "E", "e"]):
         try:
