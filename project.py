@@ -18,8 +18,8 @@ def main():
 def user_choice():
     ans = input("Are you ready to play? (yes /no /e = exit): ").strip().lower()
     while True:
-        if ans[0] == "y":
-            print("\n1. Riddles \n2. Jokes \n3. Question asking")
+        if ans == "y" or ans == "yes":
+            print("\n1. Riddles \n2. Jokes \n3. Questions ")
             response = input("\nChoose anyone of the above: ").lower()
                 
             #calling the functions according to the user response
@@ -33,27 +33,26 @@ def user_choice():
                 raise ValueError("\nPlease choose from the list 😟")
             # return response   #this ends the loop after user gives a response
 
-        elif ans[0] == "n":
+        elif ans == "n" or ans == "no":
             ans = input("You have to say yes :( ").lower()
 
-            if ans[0] == "n":
-                ans = input("Pleaasee? ").lower()
-
-                if ans[0] == "n":
-                    cowsay.cow("You made me sad")
-                    sys.exit()
+            if ans == "n" or ans == "no":
+                cowsay.cow("You made me sad")
+                sys.exit()
                         
-                elif ans[0] == 'y':
-                    print("\nYayyy")
-
-            elif ans[0] == "y":
+            elif ans == "y" or ans == "yes":
                 print("\nYayyy")
+
+            else:
+                print("Invalid response. Exiting...")
+                sys.exit()
 
         elif ans == "e":
             sys.exit("\nThank you for playing, had a fun time with you! 😙")
             
         else:
-            raise ValueError("Please provide a valid response 🙂")
+            print("\nInvalid input. Please press 'y', 'n' or 'e' to exit")
+            ans = input("\nAre you ready to play? (yes /no /e = exit): ").strip().lower()
 
 def riddle():
     column= []
@@ -91,9 +90,9 @@ def riddle():
                         match = True
 
                         response = input("\nThats correct!\n\nDo you wanna continue solving more riddles? (y/n) ")
-                        if response == "n":
+                        if response == "n" or response == "no":
                             user_choice()
-                        elif response == "y":
+                        elif response == "y" or response == "yes" :
                             print("alright!\n")
                             continue   #response = "0"
                         else:
@@ -101,9 +100,9 @@ def riddle():
 
                 if not match:  #checking after loop
                     response = input("incorrect, do you wanna try again? (y/n) ")
-                    if response == "n":
+                    if response == "n" or response == "no":
                         user_choice()
-                    elif response == "y":
+                    elif response == "y" or response == "yes":
                         print("\n\talright!\n")
                         continue  #skip the rest of the loop and show a new riddle
                     else:
@@ -126,10 +125,10 @@ def joke():
             character(jokes_choice)          #passing the joke to the animal
 
             ans = input("That was funny LOL\nDo you wanna hear some more jokes? (y/n) ")
-            if ans == "n":
+            if ans == "n" or ans == "no":
                 #for now exiting the code
                 user_choice()
-            elif ans == "y":
+            elif ans == "y" or ans == "yes":
                 print("sure!\n")
                 ans = "1"  #setting the ans to "1" so that the above loop (that works only if the answer is "1" is run)
             else:
@@ -175,7 +174,10 @@ def write_questions():
                 user_choice()
             elif response == "M":
                 continue
-            
+            else:
+                print("Please enter the correct response")
+                sys.exit()
+                            
         except FileNotFoundError:
             sys.exit("No file found")
                 

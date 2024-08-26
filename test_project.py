@@ -1,4 +1,3 @@
-import pytest
 from project import user_choice
 from unittest.mock import patch
 
@@ -51,11 +50,11 @@ def test_riddle():
             assert str(e) == "\nThank you for playing, had a fun time with you! 😙"
 
 def test_riddle_ValueError_1():
-    with patch("builtins.input", side_effect=[";"]):
+    with patch("builtins.input", side_effect=[";", "e"]):
         try:
             user_choice()   
-        except ValueError as e:   
-            assert str(e) == "Please provide a valid response 🙂"
+        except SystemExit as e:   
+            assert str(e) == "\nThank you for playing, had a fun time with you! 😙"
             
 def test_riddle_ValueError_2():
     with patch("builtins.input", side_effect=["YES" "1", "light", "y", "i dont know", "n", "e"]):
@@ -79,11 +78,11 @@ def test_jokes():
             assert str(e) == "\nThank you for playing, had a fun time with you! 😙"
 
 def test_jokes_ValueError():
-    with patch("builtins.input", side_effect=["/"]):
+    with patch("builtins.input", side_effect=["/", "yes", "q"]):
         try:
             user_choice()   
         except ValueError as e:   
-            assert str(e) == "Please provide a valid response 🙂"
+            assert str(e) == "\nPlease choose from the list 😟"
 
 def test_questions_1():
     with patch("builtins.input", side_effect=["y", "3", "Whats the meaning of life", "E", "e"]):
