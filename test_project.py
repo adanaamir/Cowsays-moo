@@ -42,6 +42,13 @@ def test_user_choice_exit_2():
         except SystemExit:
             pass
 
+def test_user_choice_exit_3():
+    with patch("builtins.input", side_effect=["no", "."]):
+        try:
+            user_choice()
+        except SystemExit:
+            pass
+
 #testing riddle() function
 def test_riddle():
     with patch("builtins.input", side_effect=["idk", "yes", "a candle", "n", "e"]):
@@ -115,3 +122,10 @@ def test_write_questions_2():
             write_questions()   
         except SystemExit as e:   
             assert str(e) == "\nThank you for playing, had a fun time with you! 😙"
+
+def test_write_questions_2():
+    with patch("builtins.input", side_effect=["im paid enough not to answer your question", "/"]):
+        try:
+            write_questions()   
+        except SystemExit:
+            pass
