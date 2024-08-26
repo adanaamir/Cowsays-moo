@@ -1,6 +1,8 @@
-import cowsay, csv
+import cowsay
+import csv
+import json
+import sys
 from random import choice
-import sys, json
 
 cowsay_char = [cowsay.beavis, cowsay.cheese, cowsay.cow, cowsay.daemon, cowsay.dragon, cowsay.fox, cowsay.ghostbusters, 
                cowsay.kitty,cowsay.meow, cowsay.miki, cowsay.milk, cowsay.octopus, cowsay.stimpy, 
@@ -68,20 +70,20 @@ def riddle():
 
             for line in csv_reader:
                 column.append(line['riddles'])
-            
+                
             character = choice(cowsay_char)
             riddle_choice = choice(column)
             character(riddle_choice)
-                    
+                        
             answer = input("Enter your answer: ").lower()
 
             #opening the file again to make a new instance of csv_reader since it is exhaused
             with open("before.csv", "r", newline= '') as file:
-                        
+                            
                 csv_reader = csv.DictReader(file)
                 for line in csv_reader:
                     ans.append(line['answers'])  #appending the answers to a new list
-                        
+                            
                 #flag, assuming users answer is incorrect
                 match = False
                 for i in ans:
