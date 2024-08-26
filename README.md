@@ -6,6 +6,8 @@ This program features three main functions:
 2. Jokes: If you're in a mood for some humor, a character will tell you jokes.
 3. Questions: You can ask any question and a random character will answer them. You can even add some hilarious responses.
 
+Libraries Used: cowsay, json, sys, random, cvs
+
 The first file "project.py" is the main file in which all of the code is written. It has 4 functions as described above. The forth function "write_questions" is a sub part of the function "ask_questions". 
 
 The second file "before.csv" is the file in which all of the riddles, its answers, and jokes are saved. These jokes and riddles are displayed by reading this csv file.
