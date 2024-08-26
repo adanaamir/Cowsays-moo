@@ -73,30 +73,44 @@ def test_riddle_ValueError():
 
 #testing jokes() function           
 def test_jokes():
-    with patch("builtins.input", side_effect=["yes", "2", "y", "n", "e"]):
+    with patch("builtins.input", side_effect=["y", "n", "e"]):
         try:
-            user_choice()   
+            joke()   
         except SystemExit as e:   
             assert str(e) == "\nThank you for playing, had a fun time with you! 😙"
 
-def test_jokes_ValueError():
-    with patch("builtins.input", side_effect=["/", "yes", "q"]):
+def test_jokes_ValueError_1():
+    with patch("builtins.input", side_effect=["/"]):
         try:
-            user_choice()   
+            joke()  
+        except ValueError as e:   
+            assert str(e) == "Please provide a valid response 🙂"
+            
+def test_jokes_ValueError_2():
+    with patch("builtins.input", side_effect=["y", "yes", "no" ,"y", "q"]):
+        try:
+            joke()  
         except ValueError as e:   
             assert str(e) == "\nPlease choose from the list 😟"
 
 #testting questions function
-def test_questions_1():
-    with patch("builtins.input", side_effect=["y", "3", "Whats the meaning of life", "E", "e"]):
+def test_ask_questions():
+    with patch("builtins.input", side_effect=["Whats the meaning of life", "E", "e"]):
         try:
-            user_choice()   
+            ask_questions()
         except SystemExit as e:   
             assert str(e) == "\nThank you for playing, had a fun time with you! 😙"
             
-def test_questions_2():
-    with patch("builtins.input", side_effect=["ya", "3", "are you real?", "W", "mom said no, sorry", "E", "e"]):
+def test_write_questions_1():
+    with patch("builtins.input", side_effect=["are you real?", "W", "mom said no, sorry", "E", "e"]):
         try:
-            user_choice()   
+            ask_questions()   
+        except SystemExit as e:   
+            assert str(e) == "\nThank you for playing, had a fun time with you! 😙"
+            
+def test_write_questions_2():
+    with patch("builtins.input", side_effect=["not a very nice question", "M", "8, it has to be 8", "E", "e"]):
+        try:
+            write_questions()   
         except SystemExit as e:   
             assert str(e) == "\nThank you for playing, had a fun time with you! 😙"
