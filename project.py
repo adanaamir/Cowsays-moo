@@ -107,7 +107,7 @@ def riddle():
                         continue  #skip the rest of the loop and show a new riddle
                     else:
                         raise ValueError("Please provide a valid response 🙂")
-
+                    
 def joke():
     column = []
     print("\nLets hear some jokes then\n")
@@ -177,7 +177,7 @@ def write_questions():
             else:
                 print("Please enter the correct response")
                 sys.exit()
-                            
+
         except FileNotFoundError:
             sys.exit("No file found")
                 

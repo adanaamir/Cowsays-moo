@@ -1,4 +1,4 @@
-from project import user_choice
+from project import user_choice, riddle, joke, ask_questions, write_questions
 from unittest.mock import patch
 
 # Since user_choice() relies on user input, we'll need to mock this input.
@@ -38,38 +38,40 @@ def test_user_choice_exit_1():
 def test_user_choice_exit_2():
     with patch("builtins.input", side_effect=["no", "nope", "NO"]):
         try:
-            user_choice()   
+            user_choice()
         except SystemExit:
             pass
 
+#testing riddle() function
 def test_riddle():
-    with patch("builtins.input", side_effect=["y", "1", "idk", "n", "e"]):
+    with patch("builtins.input", side_effect=["idk", "yes", "a candle", "n", "e"]):
         try:
-            user_choice()   
+            riddle()   
         except SystemExit as e:   
             assert str(e) == "\nThank you for playing, had a fun time with you! 😙"
 
-def test_riddle_ValueError_1():
-    with patch("builtins.input", side_effect=[";", "e"]):
+def test_riddle_1():
+    with patch("builtins.input", side_effect=[";", "y", "a knife", "no", "e"]):
         try:
-            user_choice()   
+            riddle()  
         except SystemExit as e:   
             assert str(e) == "\nThank you for playing, had a fun time with you! 😙"
             
-def test_riddle_ValueError_2():
-    with patch("builtins.input", side_effect=["YES" "1", "light", "y", "i dont know", "n", "e"]):
+def test_riddle_2():
+    with patch("builtins.input", side_effect=["light", "y", "i dont know", "n", "e"]):
         try:
-            user_choice()   
-        except ValueError as e:   
-            assert str(e) == "\nPlease choose from the list 😟"
+            riddle()  
+        except SystemExit as e:   
+            assert str(e) == "\nThank you for playing, had a fun time with you! 😙"
             
-def test_riddle_ValueError_3():
+def test_riddle_ValueError():
     with patch("builtins.input", side_effect=["y", "4"]):
         try:
-            user_choice()   
+            riddle()   
         except ValueError as e:   
-            assert str(e) == "\nPlease choose from the list 😟"
-            
+            assert str(e) == "Please provide a valid response 🙂"
+
+#testing jokes() function           
 def test_jokes():
     with patch("builtins.input", side_effect=["yes", "2", "y", "n", "e"]):
         try:
@@ -84,6 +86,7 @@ def test_jokes_ValueError():
         except ValueError as e:   
             assert str(e) == "\nPlease choose from the list 😟"
 
+#testting questions function
 def test_questions_1():
     with patch("builtins.input", side_effect=["y", "3", "Whats the meaning of life", "E", "e"]):
         try:
