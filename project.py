@@ -55,58 +55,48 @@ def user_choice():
             ans = input("\nAre you ready to play? (yes /no /e = exit): ").strip().lower()
 
 def riddle():
-    column= []
-    ans = []
+    riddles_and_answers = []
     
     print("\nooo okay! lets see if you can crack this riddle.")
     while True:
         #clearing out both the lists so that after the loop is run again, the old data is deleted and the lists are being populated correctly
-        column.clear()
-        ans.clear()
+        riddles_and_answers.clear()
 
         with open("before.csv", "r", newline= '') as file:
             csv_reader = csv.DictReader(file)
 
-            for line in csv_reader:
-                column.append(line['riddles'])
+            for line in csv_reader:  #storing both the riddles and its answers in the same list
+                riddles_and_answers.append((line['riddles'], line['answers']))  #adding double brackets because list.append takes 1 argument
                 
             character = choice(cowsay_char)
-            riddle_choice = choice(column)
-            character(riddle_choice)
+            
+            #randomly choosing a riddle and its answer
+            chosen_riddle, correct_ans = choice(riddles_and_answers)
+            character(chosen_riddle)
                         
             answer = input("Enter your answer: ").lower()
 
-            #opening the file again to make a new instance of csv_reader since it is exhaused
-            with open("before.csv", "r", newline= '') as file:
-                            
-                csv_reader = csv.DictReader(file)
-                for line in csv_reader:
-                    ans.append(line['answers'])  #appending the answers to a new list
-                            
-                #flag, assuming users answer is incorrect
-                match = False
-                for i in ans:
-                    if answer == i:
-                        match = True
+            if answer == correct_ans.lower():                     
+                response = input("\nThats correct!\n\nDo you wanna continue solving more riddles? (y/n) ")
+                if response == "n" or response == "no":
+                    user_choice()
+                elif response == "y" or response == "yes" :
+                    print("alright!\n")
+                    continue   #response = "0"
+                else:
+                    raise ValueError("Please provide a valid response 🙂")
+                
+            else:                    
+                print(f"Incorrect. The correct answer is: {correct_ans}")
 
-                        response = input("\nThats correct!\n\nDo you wanna continue solving more riddles? (y/n) ")
-                        if response == "n" or response == "no":
-                            user_choice()
-                        elif response == "y" or response == "yes" :
-                            print("alright!\n")
-                            continue   #response = "0"
-                        else:
-                            raise ValueError("Please provide a valid response 🙂")
-
-                if not match:  #checking after loop
-                    response = input("incorrect, do you wanna try again? (y/n) ")
-                    if response == "n" or response == "no":
-                        user_choice()
-                    elif response == "y" or response == "yes":
-                        print("\n\talright!\n")
-                        continue  #skip the rest of the loop and show a new riddle
-                    else:
-                        raise ValueError("Please provide a valid response 🙂")
+                response = input("Do you wanna try again? (y/n) ")
+                if response == "n" or response == "no":
+                    user_choice()
+                elif response == "y" or response == "yes":
+                    print("\n\talright!\n")
+                    continue  #skip the rest of the loop and show a new riddle
+                else:
+                    raise ValueError("Please provide a valid response 🙂")
                     
 def joke():
     column = []
