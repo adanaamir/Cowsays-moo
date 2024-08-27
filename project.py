@@ -65,11 +65,11 @@ def riddle():
         with open("before.csv", "r", newline= '') as file:
             csv_reader = csv.DictReader(file)
 
-            for line in csv_reader:  #storing both the riddles and its answers in the same list
+            for line in csv_reader:  #storing both the riddles and its answers in a separate but same list
                 riddles_and_answers.append((line['riddles'], line['answers']))  #adding double brackets because list.append takes 1 argument
                 
             character = choice(cowsay_char)
-            
+
             #randomly choosing a riddle and its answer
             chosen_riddle, correct_ans = choice(riddles_and_answers)
             character(chosen_riddle)
