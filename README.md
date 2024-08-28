@@ -1,11 +1,16 @@
 # Cowsays-moo
 #### Video Demo: (https://youtu.be/AKIYT9C4ayE)
 #### Description:
-This is a fun and interactive program where users can enjoy riddles, jokes, ask questions and get responses from random characters. This program has 4 main functions: 
-1.  riddle:  A random character will ask you riddles and you'll have to crack them.
-2.  joke:  If you're in a mood for some humor, a character will tell you jokes.
-3.  ask_questions:  You can ask any question and a random character will answer them.
-4.  write_responses:  This function is a sub part of "ask_questions" where you can write hilarious responses.
+"Cowsays-moo" is an engaging and interactive Python program designed to bring a smile to your face with riddles, jokes, and quirky character responses. Inspired by the classic "cowsay" program, this project introduces four primary functions that users can explore for fun and entertainment:
+
+Riddle: This feature challenges the user with riddles presented by a random character. It’s an excellent way to test your problem-solving skills and have some fun cracking the answers.
+
+Joke: If you're in need of a good laugh, this function is for you. A character of the program will deliver a joke, chosen randomly from a collection of humorous snippets. It’s perfect for lightening the mood.
+
+Ask Questions: Curious about something? Ask away! In this mode, you can pose any question, and a random character will provide an answer. The responses range from witty and humorous to surprisingly insightful, adding a playful twist to the typical Q&A format.
+
+Write Responses: This is a specialized sub-function of the "Ask Questions" feature. It allows users to contribute by writing their own humorous or clever responses, which will be stored and potentially used to answer future questions. This makes the program dynamic and continuously evolving based on user input.
+
 
 #### Libraries Used:
 - cowsay
